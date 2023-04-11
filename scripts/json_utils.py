@@ -104,8 +104,11 @@ def correct_json(json_str: str) -> str:
 
     try:
         if cfg.debug:
-            print("json", json_str)
-        json.loads(json_str)
+            print("Trying extract json from given text corpus\n", json_str)
+        start_index = json_str.find("{")
+        end_index = json_str.rfind("}")
+        result = json_str[start_index:end_index+1]
+        json.loads(result)
         return json_str
     except json.JSONDecodeError as e:
         if cfg.debug:
